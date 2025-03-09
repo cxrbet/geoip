@@ -1,18 +1,22 @@
-[
-  {
-    "type": "text",
-    "action": "add",
-    "args": {
-      "uri": "blockip.txt",
-      "wantedList": ["blockip"]
+{
+  "sources": [
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "uri": "customip.txt",
+        "wantedList": ["private", "internal"]
+      }
     }
-  },
-  {
-    "type": "v2rayGeoIPDat",
-    "action": "output",
-    "args": {
-      "outputName": "blockip.dat",
-      "wantedList": ["blockip"]
+  ],
+  "outputs": [
+    {
+      "type": "v2rayGeoIPDat",
+      "action": "output",
+      "args": {
+        "outputName": "customip.dat",
+        "wantedList": ["private", "internal"]
+      }
     }
-  }
-]
+  ]
+}
