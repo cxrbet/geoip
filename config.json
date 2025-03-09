@@ -4,7 +4,7 @@
       "type": "text",
       "action": "add",
       "args": {
-        "uri": "blockip.txt",
+        "uri": "./blockip.txt",
         "wantedList": ["blockip"]
       }
     }
