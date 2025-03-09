@@ -4,7 +4,9 @@
       "type": "text",
       "action": "add",
       "args": {
-        "uri": "./blockip.txt"
+        "name": "blockip",
+        "onlyIPType": "ipv4",
+        "uri": "https://raw.githubusercontent.com/cxrbet/geoip/refs/heads/master/blockip.txt"
       }
     }
   ],
