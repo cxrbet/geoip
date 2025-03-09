@@ -1,8 +1,8 @@
 name: Build Custom GeoIP Files
 
 on:
-  workflow_dispatch:  # 手动触发
-  push:              # 推送触发
+  workflow_dispatch:
+  push:
     branches:
       - master
     paths-ignore:
@@ -35,27 +35,30 @@ jobs:
         run: |
           echo "Current directory contents:"
           ls -la
+          cat ./config.json || { echo "Failed to read config.json"; exit 1; }
           go build ./
           ./geoip convert -c ./config.json || { echo "Convert failed"; exit 1; }
           echo "Files after conversion:"
           ls -la
+          ls -la ./output || { echo "Output directory not found"; exit 1; }
+          test -f ./output/blockip.dat || { echo "blockip.dat was not generated"; exit 1; }
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: custom-geoip-files
-          path: "blockip.dat"
+          path: "./output/blockip.dat"
 
       - name: Generate sha256 checksum for dat files
         run: |
-          cd ./ || exit 1
+          cd ./output || exit 1
           sha256sum blockip.dat > ./blockip.dat.sha256sum
 
       - name: Upload files to GitHub release
-        uses: svenstaro/upload-release-action@v2
+        uses: actions/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
-          file: ./blockip.dat ./blockip.dat.sha256sum
+          file: ./output/blockip.dat ./output/blockip.dat.sha256sum
           release_name: ${{ env.RELEASE_NAME }}
           tag: ${{ env.TAG_NAME }}
