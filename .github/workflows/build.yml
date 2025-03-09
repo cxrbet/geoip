@@ -1,8 +1,8 @@
 name: Build Custom GeoIP Files
 
 on:
-  workflow_dispatch:  # 保留手动触发
-  push:              # 保留推送触发
+  workflow_dispatch:  # 手动触发
+  push:              # 推送触发
     branches:
       - master
     paths-ignore:
@@ -44,18 +44,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: custom-geoip-files
-          path: "customip.dat"
+          path: "blockip.dat"
 
       - name: Generate sha256 checksum for dat files
         run: |
           cd ./ || exit 1
-          sha256sum customip.dat > ./customip.dat.sha256sum
+          sha256sum blockip.dat > ./blockip.dat.sha256sum
 
       - name: Upload files to GitHub release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file_glob: true
-          file: ./customip.dat ./customip.dat.sha256sum
+          file: ./blockip.dat ./blockip.dat.sha256sum
           release_name: ${{ env.RELEASE_NAME }}
           tag: ${{ env.TAG_NAME }}
