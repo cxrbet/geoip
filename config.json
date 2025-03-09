@@ -4,8 +4,8 @@
       "type": "text",
       "action": "add",
       "args": {
-        "uri": "customip.txt",
-        "wantedList": ["private", "internal"]
+        "uri": "blockip.txt",
+        "wantedList": ["blockip"]
       }
     }
   ],
@@ -14,8 +14,8 @@
       "type": "v2rayGeoIPDat",
       "action": "output",
       "args": {
-        "outputName": "customip.dat",
-        "wantedList": ["private", "internal"]
+        "outputName": "blockip.dat",
+        "wantedList": ["blockip"]
       }
     }
   ]
