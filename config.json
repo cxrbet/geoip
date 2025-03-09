@@ -1,21 +1,21 @@
 {
-  "sources": [
+  "input": [
     {
       "type": "text",
       "action": "add",
       "args": {
-        "uri": "./blockip.txt",
-        "wantedList": ["blockip"]
+        "uri": "./blockip.txt"
       }
     }
   ],
-  "outputs": [
+  "output": [
     {
       "type": "v2rayGeoIPDat",
       "action": "output",
       "args": {
-        "outputName": "blockip.dat",
-        "wantedList": ["blockip"]
+        "outputDir": "./output",
+        "wantedList": ["blockip"],
+        "outputName": "blockip.dat"
       }
     }
   ]
